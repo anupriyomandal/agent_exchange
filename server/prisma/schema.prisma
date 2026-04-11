@@ -1,0 +1,76 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum AgentCategory {
+  customer_support
+  sales
+  hr
+  marketing
+  internal_tools
+  operations
+  finance
+  other
+}
+
+enum AgentStatus {
+  draft
+  pending_review
+  published
+  archived
+}
+
+enum AdminRole {
+  admin
+  editor
+}
+
+model AdminUser {
+  id            String   @id @default(uuid())
+  name          String   @db.VarChar(100)
+  email         String   @unique @db.VarChar(255)
+  password_hash String   @db.VarChar(255)
+  role          AdminRole @default(editor)
+  created_at    DateTime @default(now())
+  agents        Agent[]
+
+  @@map("admin_users")
+}
+
+model Agent {
+  id                String        @id @default(uuid())
+  name              String        @db.VarChar(100)
+  slug              String        @unique @db.VarChar(100)
+  short_description String        @db.VarChar(200)
+  long_description  String        @db.Text
+  icon_url          String?       @db.Text
+  category          AgentCategory
+  channels          Json          @default("[]")
+  channel_links     Json          @default("{}")
+  status            AgentStatus   @default(draft)
+  likes_count       Int           @default(0)
+  created_by        String
+  created_at        DateTime      @default(now())
+  updated_at        DateTime      @updatedAt
+  admin             AdminUser     @relation(fields: [created_by], references: [id])
+  reviews           Review[]
+
+  @@map("agents")
+}
+
+model Review {
+  id             String   @id @default(uuid())
+  agent_id       String
+  reviewer_name  String   @db.VarChar(100)
+  rating         Int
+  comment        String   @db.Text
+  created_at     DateTime @default(now())
+  agent          Agent    @relation(fields: [agent_id], references: [id], onDelete: Cascade)
+
+  @@map("reviews")
+}
