@@ -78,16 +78,16 @@ export default function Catalog() {
         </div>
 
         {/* Category pills + sort */}
-        <div className="flex items-center justify-between gap-4 mb-8">
-          <div className="flex items-center gap-2 flex-wrap">
+        <div className="flex items-center justify-between gap-3 mb-8">
+          <div className="flex items-center gap-1.5 flex-wrap">
             {ALL_CATEGORIES.map((cat) => (
               <button
                 key={cat.value}
                 onClick={() => setActiveCategory(cat.value)}
-                className={`px-4 py-2 rounded-full text-sm font-semibold transition-all duration-200 ${
+                className={`px-3 py-1 rounded-full text-xs font-semibold transition-all duration-200 ${
                   activeCategory === cat.value
                     ? 'bg-[#1B3C8C] text-white shadow-sm'
-                    : 'bg-white text-gray-600 hover:bg-gray-100 border border-gray-200'
+                    : 'bg-white text-gray-500 hover:bg-gray-100 border border-gray-200'
                 }`}
               >
                 {cat.label}
@@ -97,7 +97,7 @@ export default function Catalog() {
           <select
             value={sort}
             onChange={(e) => setSort(e.target.value)}
-            className="input w-auto text-sm"
+            className="input w-auto text-xs py-1 px-2 flex-shrink-0"
           >
             <option value="newest">Newest</option>
             <option value="likes">Most Liked</option>
