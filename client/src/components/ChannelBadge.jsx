@@ -13,10 +13,10 @@ export default function ChannelBadge({ channel, href, size = 'sm' }) {
   const label = CHANNEL_LABELS[channel] || channel;
   const classes =
     size === 'sm'
-      ? 'px-2 py-0.5 text-xs'
-      : 'px-3 py-1 text-sm';
+      ? 'px-2.5 py-1 text-xs'
+      : 'px-3.5 py-1.5 text-sm';
 
-  const base = `inline-block rounded-full bg-gray-100 text-gray-600 font-medium ${classes}`;
+  const base = `inline-block rounded-full bg-[#E8EEF8] text-[#1B3C8C] font-semibold ${classes}`;
 
   if (href) {
     return (
@@ -24,7 +24,7 @@ export default function ChannelBadge({ channel, href, size = 'sm' }) {
         href={href}
         target="_blank"
         rel="noopener noreferrer"
-        className={`${base} hover:bg-gray-200 transition-colors`}
+        className={`${base} hover:bg-[#1B3C8C] hover:text-white transition-all duration-200`}
       >
         {label}
       </a>

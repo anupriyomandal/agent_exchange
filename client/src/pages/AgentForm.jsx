@@ -185,7 +185,7 @@ export default function AgentForm() {
             <button
               type="button"
               onClick={() => setShowPreview((p) => !p)}
-              className="text-xs text-[#534AB7] hover:underline"
+              className="text-xs text-[#1B3C8C] hover:underline"
             >
               {showPreview ? 'Edit' : 'Preview'}
             </button>
@@ -236,7 +236,7 @@ export default function AgentForm() {
                   type="checkbox"
                   checked={channels.includes(ch)}
                   onChange={() => toggleChannel(ch)}
-                  className="accent-[#534AB7]"
+                  className="accent-[#1B3C8C]"
                 />
                 <span className="text-sm text-gray-700">{CHANNEL_LABELS[ch]}</span>
               </label>

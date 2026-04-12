@@ -37,22 +37,24 @@ export default function Catalog() {
   }, [agents, activeCategory, search]);
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
       {/* Header */}
-      <header className="bg-white border-b border-gray-200 sticky top-0 z-10">
-        <div className="max-w-3xl mx-auto px-4 py-4">
+      <header className="bg-white/80 backdrop-blur-md border-b border-gray-100 sticky top-0 z-10">
+        <div className="max-w-4xl mx-auto px-4 py-4">
           <div className="flex items-center justify-between gap-4">
-            <div className="flex items-center gap-2">
-              <div className="w-8 h-8 bg-[#534AB7] rounded-lg flex items-center justify-center">
+            <div className="flex items-center gap-3">
+              <div className="w-9 h-9 bg-[#1B3C8C] rounded-xl flex items-center justify-center shadow-sm">
                 <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
                 </svg>
               </div>
-              <span className="font-bold text-lg text-[#534AB7]">Agent Exchange</span>
+              <div>
+                <span className="font-extrabold text-lg text-[#1B3C8C] tracking-tight">CEAT AI Agent Exchange</span>
+              </div>
             </div>
             <div className="flex-1 max-w-sm">
               <div className="relative">
-                <svg className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                 </svg>
                 <input
@@ -60,7 +62,7 @@ export default function Catalog() {
                   placeholder="Search agents..."
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
-                  className="input pl-9"
+                  className="input pl-10"
                 />
               </div>
             </div>
@@ -68,18 +70,24 @@ export default function Catalog() {
         </div>
       </header>
 
-      <div className="max-w-3xl mx-auto px-4 py-6">
+      <div className="max-w-4xl mx-auto px-4 py-8">
+        {/* Hero text */}
+        <div className="mb-8">
+          <h1 className="text-2xl font-extrabold text-gray-900 tracking-tight">Discover AI Agents</h1>
+          <p className="text-gray-500 mt-1">Browse and explore CEAT's AI-powered agents across channels</p>
+        </div>
+
         {/* Category pills + sort */}
-        <div className="flex items-center justify-between gap-4 mb-6">
+        <div className="flex items-center justify-between gap-4 mb-8">
           <div className="flex items-center gap-2 flex-wrap">
             {ALL_CATEGORIES.map((cat) => (
               <button
                 key={cat.value}
                 onClick={() => setActiveCategory(cat.value)}
-                className={`px-3 py-1.5 rounded-full text-sm font-medium transition-colors ${
+                className={`px-4 py-2 rounded-full text-sm font-semibold transition-all duration-200 ${
                   activeCategory === cat.value
-                    ? 'bg-[#534AB7] text-white'
-                    : 'bg-gray-100 text-gray-600 hover:bg-gray-200'
+                    ? 'bg-[#1B3C8C] text-white shadow-sm'
+                    : 'bg-white text-gray-600 hover:bg-gray-100 border border-gray-200'
                 }`}
               >
                 {cat.label}
@@ -97,33 +105,33 @@ export default function Catalog() {
         </div>
 
         {/* Results count */}
-        <p className="text-sm text-gray-400 mb-4">
-          {loading ? 'Loading...' : `${filtered.length} agent${filtered.length !== 1 ? 's' : ''}`}
+        <p className="text-sm text-gray-400 mb-4 font-medium">
+          {loading ? 'Loading...' : `${filtered.length} agent${filtered.length !== 1 ? 's' : ''} found`}
         </p>
 
         {/* Agent list */}
         {loading ? (
-          <div className="space-y-3">
+          <div className="space-y-4">
             {[...Array(4)].map((_, i) => (
-              <div key={i} className="card p-4 flex items-start gap-4 animate-pulse">
-                <div className="w-12 h-12 bg-gray-200 rounded-xl flex-shrink-0" />
+              <div key={i} className="card p-5 flex items-start gap-4 animate-pulse">
+                <div className="w-14 h-14 bg-gray-100 rounded-2xl flex-shrink-0" />
                 <div className="flex-1">
-                  <div className="h-4 bg-gray-200 rounded w-1/3 mb-2" />
-                  <div className="h-3 bg-gray-200 rounded w-2/3" />
+                  <div className="h-4 bg-gray-100 rounded-lg w-1/3 mb-3" />
+                  <div className="h-3 bg-gray-100 rounded-lg w-2/3" />
                 </div>
               </div>
             ))}
           </div>
         ) : filtered.length === 0 ? (
-          <div className="text-center py-16 text-gray-400">
-            <svg className="w-12 h-12 mx-auto mb-3 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <div className="text-center py-20 text-gray-400">
+            <svg className="w-14 h-14 mx-auto mb-4 text-gray-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
-            <p className="font-medium text-gray-500">No agents found</p>
+            <p className="font-semibold text-gray-500">No agents found</p>
             <p className="text-sm mt-1">Try a different search or category</p>
           </div>
         ) : (
-          <div className="space-y-3">
+          <div className="space-y-4">
             {filtered.map((agent) => (
               <AgentTile key={agent.id} agent={agent} />
             ))}

@@ -27,25 +27,25 @@ export default function AdminLogin() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
+    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white flex items-center justify-center px-4">
       <div className="w-full max-w-sm">
         <div className="text-center mb-8">
-          <div className="w-12 h-12 bg-[#534AB7] rounded-xl flex items-center justify-center mx-auto mb-3">
+          <div className="w-14 h-14 bg-[#1B3C8C] rounded-2xl flex items-center justify-center mx-auto mb-4 shadow-sm">
             <svg className="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
             </svg>
           </div>
-          <h1 className="text-xl font-bold text-gray-900">Agent Exchange</h1>
-          <p className="text-sm text-gray-500 mt-1">Admin Panel</p>
+          <h1 className="text-xl font-extrabold text-gray-900 tracking-tight">CEAT AI Agent Exchange</h1>
+          <p className="text-sm text-gray-500 mt-1 font-medium">Admin Panel</p>
         </div>
 
-        <div className="card p-6">
+        <div className="card p-8">
           {error && (
-            <div className="bg-red-50 text-red-600 text-sm px-3 py-2 rounded-lg mb-4">
+            <div className="bg-red-50 text-red-600 text-sm px-4 py-3 rounded-xl mb-5 font-medium">
               {error}
             </div>
           )}
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <form onSubmit={handleSubmit} className="space-y-5">
             <div>
               <label className="label">Email</label>
               <input

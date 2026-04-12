@@ -78,7 +78,7 @@ export default function AdminReviews() {
                   <div className="flex items-center gap-2 flex-wrap mb-0.5">
                     <span className="font-medium text-sm text-gray-900">{review.reviewer_name}</span>
                     <span className="text-xs text-gray-400">on</span>
-                    <span className="text-xs font-medium text-[#534AB7]">{review.agent?.name}</span>
+                    <span className="text-xs font-medium text-[#1B3C8C]">{review.agent?.name}</span>
                     <span className="text-xs text-gray-400">{timeAgo(review.created_at)}</span>
                   </div>
                   <StarDisplay rating={review.rating} size={13} />

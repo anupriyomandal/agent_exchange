@@ -112,7 +112,7 @@ export default function AdminAgents() {
                   <select
                     value={agent.status}
                     onChange={(e) => handleStatusChange(agent.id, e.target.value)}
-                    className="text-xs border border-gray-200 rounded px-1 py-0.5 focus:outline-none focus:ring-1 focus:ring-[#534AB7]"
+                    className="text-xs border border-gray-200 rounded px-1 py-0.5 focus:outline-none focus:ring-1 focus:ring-[#1B3C8C]"
                   >
                     <option value="draft">Draft</option>
                     <option value="pending_review">Pending Review</option>

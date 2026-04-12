@@ -25,7 +25,7 @@ railway init --name "agent-exchange"
 # ── 4. Add PostgreSQL database ───────────────────────────────────────────────
 echo ""
 echo "🐘 Adding PostgreSQL database..."
-railway add --database postgresql
+railway add --database postgres
 
 echo "⏳ Waiting for database to provision..."
 sleep 5

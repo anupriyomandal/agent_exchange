@@ -10,26 +10,26 @@ export default function AgentTile({ agent }) {
   return (
     <div
       onClick={() => navigate(`/agent/${agent.slug}`)}
-      className="card p-4 flex items-start gap-4 cursor-pointer hover:border-[#534AB7] transition-colors group"
+      className="card p-5 flex items-start gap-4 cursor-pointer hover:shadow-card-hover hover:border-[#1B3C8C]/30 transition-all duration-200 group"
     >
-      <AgentIcon iconUrl={agent.icon_url} name={agent.name} category={agent.category} size="md" />
+      <AgentIcon iconUrl={agent.icon_url} name={agent.name} category={agent.category} size="lg" />
 
       <div className="flex-1 min-w-0">
         <div className="flex items-start justify-between gap-2">
-          <h3 className="font-semibold text-gray-900 group-hover:text-[#534AB7] transition-colors truncate">
+          <h3 className="font-bold text-gray-900 group-hover:text-[#1B3C8C] transition-colors">
             {agent.name}
           </h3>
           {agent.avg_rating && (
-            <span className="flex items-center gap-1 text-xs text-gray-500 flex-shrink-0">
+            <span className="flex items-center gap-1 text-xs text-gray-500 flex-shrink-0 bg-gray-50 px-2 py-1 rounded-full">
               <StarDisplay rating={agent.avg_rating} size={12} />
-              <span>{agent.avg_rating}</span>
+              <span className="font-medium">{agent.avg_rating}</span>
             </span>
           )}
         </div>
-        <p className="text-sm text-gray-500 truncate mt-0.5">{agent.short_description}</p>
+        <p className="text-sm text-gray-500 mt-1 line-clamp-1">{agent.short_description}</p>
 
-        <div className="flex items-center justify-between mt-2">
-          <span className="flex items-center gap-1 text-xs text-gray-400">
+        <div className="flex items-center justify-between mt-3">
+          <span className="flex items-center gap-1.5 text-xs text-gray-400 font-medium">
             <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path
                 strokeLinecap="round"
@@ -40,12 +40,12 @@ export default function AgentTile({ agent }) {
             </svg>
             {agent.likes_count}
           </span>
-          <div className="flex items-center gap-1 flex-wrap justify-end">
+          <div className="flex items-center gap-1.5 flex-wrap justify-end">
             {(agent.channels || []).slice(0, 3).map((ch) => (
               <ChannelBadge key={ch} channel={ch} />
             ))}
             {(agent.channels || []).length > 3 && (
-              <span className="text-xs text-gray-400">+{agent.channels.length - 3}</span>
+              <span className="text-xs text-gray-400 font-medium">+{agent.channels.length - 3}</span>
             )}
           </div>
         </div>
