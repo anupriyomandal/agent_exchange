@@ -32,20 +32,31 @@ router.get('/', async (req, res) => {
     const agents = await prisma.agent.findMany({
       where,
       orderBy,
-      include: {
+      select: {
+        id: true,
+        slug: true,
+        name: true,
+        category: true,
+        icon_url: true,
+        short_description: true,
+        likes_count: true,
+        channels: true,
+        created_at: true,
         reviews: { select: { rating: true } },
       },
     });
 
-    const result = agents.map((a) => ({
-      ...a,
-      avg_rating:
-        a.reviews.length > 0
-          ? parseFloat((a.reviews.reduce((sum, r) => sum + r.rating, 0) / a.reviews.length).toFixed(1))
-          : null,
-      review_count: a.reviews.length,
-      reviews: undefined,
-    }));
+    const result = agents.map((a) => {
+      const { reviews, ...rest } = a;
+      return {
+        ...rest,
+        avg_rating:
+          reviews.length > 0
+            ? parseFloat((reviews.reduce((sum, r) => sum + r.rating, 0) / reviews.length).toFixed(1))
+            : null,
+        review_count: reviews.length,
+      };
+    });
 
     res.json(result);
   } catch (err) {
