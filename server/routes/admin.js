@@ -1,8 +1,21 @@
 const express = require('express');
 const { PrismaClient } = require('@prisma/client');
 const multer = require('multer');
+const sharp = require('sharp');
 const slugify = require('slugify');
 const authMiddleware = require('../middleware/auth');
+
+// SVGs pass through unchanged; raster formats get resized to 96x96 WebP.
+async function iconToDataUrl(file) {
+  if (file.mimetype === 'image/svg+xml') {
+    return `data:${file.mimetype};base64,${file.buffer.toString('base64')}`;
+  }
+  const resized = await sharp(file.buffer)
+    .resize(96, 96, { fit: 'cover' })
+    .webp({ quality: 82 })
+    .toBuffer();
+  return `data:image/webp;base64,${resized.toString('base64')}`;
+}
 
 const router = express.Router();
 const prisma = new PrismaClient();
@@ -73,7 +86,7 @@ router.post('/agents', upload.single('icon'), async (req, res) => {
 
     let icon_url = null;
     if (req.file) {
-      icon_url = `data:${req.file.mimetype};base64,${req.file.buffer.toString('base64')}`;
+      icon_url = await iconToDataUrl(req.file);
     }
 
     const parsedChannels = typeof channels === 'string' ? JSON.parse(channels) : channels || [];
@@ -111,7 +124,7 @@ router.put('/agents/:id', upload.single('icon'), async (req, res) => {
 
     let icon_url = existing.icon_url;
     if (req.file) {
-      icon_url = `data:${req.file.mimetype};base64,${req.file.buffer.toString('base64')}`;
+      icon_url = await iconToDataUrl(req.file);
     }
 
     const parsedChannels = channels
