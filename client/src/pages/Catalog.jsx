@@ -37,7 +37,7 @@ export default function Catalog() {
   }, [agents, activeCategory, search]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
+    <div className="min-h-screen bg-page-gradient">
       {/* Header */}
       <header className="bg-white/80 backdrop-blur-md border-b border-gray-100 sticky top-0 z-10">
         <div className="max-w-4xl mx-auto px-4 py-4">
@@ -73,8 +73,8 @@ export default function Catalog() {
       <div className="max-w-4xl mx-auto px-4 py-8 min-h-[calc(100vh-72px)] flex flex-col">
         {/* Hero text */}
         <div className="mb-8">
-          <h1 className="text-2xl font-extrabold text-gray-900 tracking-tight">Discover AI Agents</h1>
-          <p className="text-gray-500 mt-1">Browse and explore CEAT's AI-powered agents across channels</p>
+          <h1 className="text-2xl font-extrabold text-gray-900 tracking-tighter">Discover AI Agents</h1>
+          <p className="text-gray-400 mt-1 text-sm">Browse and explore CEAT's AI-powered agents across channels</p>
         </div>
 
         {/* Category pills + sort */}

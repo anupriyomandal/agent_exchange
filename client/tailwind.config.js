@@ -20,8 +20,16 @@ export default {
         },
       },
       boxShadow: {
-        'card': '0 1px 3px 0 rgba(27, 60, 140, 0.04), 0 1px 2px -1px rgba(27, 60, 140, 0.06)',
-        'card-hover': '0 4px 12px 0 rgba(27, 60, 140, 0.1), 0 2px 4px -1px rgba(27, 60, 140, 0.06)',
+        'card': '0 1px 2px 0 rgba(0,0,0,0.04), 0 0 0 1px rgba(0,0,0,0.03)',
+        'card-hover': '0 8px 24px 0 rgba(27,60,140,0.10), 0 1px 3px 0 rgba(27,60,140,0.06)',
+        'elevated': '0 4px 16px 0 rgba(0,0,0,0.08), 0 1px 3px 0 rgba(0,0,0,0.04)',
+      },
+      letterSpacing: {
+        tight: '-0.02em',
+        tighter: '-0.03em',
+      },
+      backgroundImage: {
+        'page-gradient': 'linear-gradient(160deg, #f8faff 0%, #f1f5fb 50%, #fafafa 100%)',
       },
     },
   },

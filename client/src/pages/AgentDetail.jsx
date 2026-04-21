@@ -90,7 +90,7 @@ export default function AgentDetail() {
   const channelLinks = agent.channel_links || {};
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
+    <div className="min-h-screen bg-page-gradient">
       <div className="max-w-2xl mx-auto px-4 py-8">
         {/* Back */}
         <button
@@ -108,7 +108,7 @@ export default function AgentDetail() {
           <div className="flex items-start gap-5">
             <AgentIcon iconUrl={agent.icon_url} name={agent.name} category={agent.category} size="xl" />
             <div className="flex-1 min-w-0">
-              <h1 className="text-2xl font-extrabold text-gray-900 tracking-tight">{agent.name}</h1>
+              <h1 className="text-2xl font-extrabold text-gray-900 tracking-tighter">{agent.name}</h1>
               <span className="inline-block mt-2 px-3 py-1 rounded-full bg-[#E8EEF8] text-[#1B3C8C] text-xs font-semibold">
                 {CATEGORY_LABELS[agent.category] || agent.category}
               </span>
