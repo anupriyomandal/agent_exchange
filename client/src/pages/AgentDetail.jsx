@@ -113,6 +113,11 @@ export default function AgentDetail() {
                 {CATEGORY_LABELS[agent.category] || agent.category}
               </span>
               <p className="text-sm text-gray-500 mt-3 leading-relaxed">{agent.short_description}</p>
+              {agent.created_by_name && (
+                <p className="text-xs text-gray-400 mt-3">
+                  Made by <span className="font-medium text-gray-600">{agent.created_by_name}</span>
+                </p>
+              )}
             </div>
           </div>
 

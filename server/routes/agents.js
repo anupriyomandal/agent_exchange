@@ -85,6 +85,7 @@ router.get('/:slug', async (req, res) => {
       where: { slug: req.params.slug },
       include: {
         reviews: { orderBy: { created_at: 'desc' } },
+        admin: { select: { name: true } },
       },
     });
 
@@ -97,7 +98,13 @@ router.get('/:slug', async (req, res) => {
         ? parseFloat((agent.reviews.reduce((sum, r) => sum + r.rating, 0) / agent.reviews.length).toFixed(1))
         : null;
 
-    res.json({ ...agent, avg_rating, review_count: agent.reviews.length });
+    res.json({
+      ...agent,
+      avg_rating,
+      review_count: agent.reviews.length,
+      created_by_name: agent.admin?.name || null,
+      admin: undefined,
+    });
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: 'Server error' });
