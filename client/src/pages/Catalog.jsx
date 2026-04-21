@@ -70,7 +70,7 @@ export default function Catalog() {
         </div>
       </header>
 
-      <div className="max-w-4xl mx-auto px-4 py-8">
+      <div className="max-w-4xl mx-auto px-4 py-8 min-h-[calc(100vh-72px)] flex flex-col">
         {/* Hero text */}
         <div className="mb-8">
           <h1 className="text-2xl font-extrabold text-gray-900 tracking-tight">Discover AI Agents</h1>
@@ -137,6 +137,10 @@ export default function Catalog() {
             ))}
           </div>
         )}
+
+        <footer className="mt-auto pt-12 text-center text-xs text-gray-400">
+          Made by Anupriyo Mandal
+        </footer>
       </div>
     </div>
   );
