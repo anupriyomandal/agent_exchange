@@ -1,22 +1,28 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AgentIcon from './AgentIcon';
 import { CATEGORY_LABELS } from '../lib/utils';
 
 export default function AgentTile({ agent, isLast }) {
   const navigate = useNavigate();
+  const [nameZoom, setNameZoom] = useState(false);
+
+  function handleNameClick() {
+    setNameZoom(true);
+    setTimeout(() => setNameZoom(false), 350);
+  }
 
   return (
-    <div
-      onClick={() => navigate(`/agent/${agent.slug}`)}
-      className={`flex items-center gap-4 py-3.5 cursor-pointer group ${!isLast ? 'border-b border-gray-100' : ''}`}
-    >
+    <div className={`flex items-center gap-4 py-3.5 ${!isLast ? 'border-b border-gray-100' : ''}`}>
       {/* Icon */}
       <AgentIcon iconUrl={agent.icon_url} name={agent.name} category={agent.category} size="lg" />
 
       {/* Info */}
-      <div className="flex-1 min-w-0">
-        <p className="text-[15px] font-semibold text-gray-900 truncate leading-snug">
+      <div className="flex-1 min-w-0" onClick={handleNameClick}>
+        <p
+          className="text-[15px] font-semibold text-gray-900 truncate leading-snug transition-transform duration-200 origin-left inline-block"
+          style={{ transform: nameZoom ? 'scale(1.08)' : 'scale(1)' }}
+        >
           {agent.name}
         </p>
         <p className="text-[13px] text-gray-400 truncate mt-0.5 leading-snug">
@@ -41,10 +47,11 @@ export default function AgentTile({ agent, isLast }) {
         </div>
       </div>
 
-      {/* Open button */}
+      {/* Open button — only this navigates */}
       <button
+        onClick={() => navigate(`/agent/${agent.slug}`)}
         className="flex-shrink-0 px-4 py-1.5 rounded-full bg-[#F2F2F7] text-[#1B3C8C] text-[13px] font-semibold
-                   group-hover:bg-[#1B3C8C] group-hover:text-white transition-all duration-150"
+                   hover:bg-[#1B3C8C] hover:text-white transition-all duration-150"
       >
         Open
       </button>
