@@ -102,7 +102,7 @@ router.get('/:slug', async (req, res) => {
       ...agent,
       avg_rating,
       review_count: agent.reviews.length,
-      created_by_name: agent.admin?.name || null,
+      created_by_name: agent.creator_name || agent.admin?.name || null,
       admin: undefined,
     });
   } catch (err) {

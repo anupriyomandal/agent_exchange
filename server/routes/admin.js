@@ -70,7 +70,7 @@ router.get('/agents', async (req, res) => {
 
 // POST /api/admin/agents
 router.post('/agents', upload.single('icon'), async (req, res) => {
-  const { name, short_description, long_description, category, channels, channel_links, status } = req.body;
+  const { name, short_description, long_description, category, channels, channel_links, status, creator_name } = req.body;
 
   if (!name || !short_description || !long_description || !category) {
     return res.status(400).json({ error: 'name, short_description, long_description, and category are required' });
@@ -99,6 +99,7 @@ router.post('/agents', upload.single('icon'), async (req, res) => {
         short_description,
         long_description,
         icon_url,
+        creator_name: creator_name || null,
         category,
         channels: parsedChannels,
         channel_links: parsedChannelLinks,
@@ -116,7 +117,7 @@ router.post('/agents', upload.single('icon'), async (req, res) => {
 
 // PUT /api/admin/agents/:id
 router.put('/agents/:id', upload.single('icon'), async (req, res) => {
-  const { name, short_description, long_description, category, channels, channel_links, status } = req.body;
+  const { name, short_description, long_description, category, channels, channel_links, status, creator_name } = req.body;
 
   try {
     const existing = await prisma.agent.findUnique({ where: { id: req.params.id } });
@@ -146,6 +147,7 @@ router.put('/agents/:id', upload.single('icon'), async (req, res) => {
         ...(short_description ? { short_description } : {}),
         ...(long_description ? { long_description } : {}),
         ...(category ? { category } : {}),
+        ...(creator_name !== undefined ? { creator_name: creator_name || null } : {}),
         icon_url,
         channels: parsedChannels,
         channel_links: parsedChannelLinks,

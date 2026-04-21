@@ -18,6 +18,7 @@ export default function AgentForm() {
   const [showPreview, setShowPreview] = useState(false);
 
   const [name, setName] = useState('');
+  const [creatorName, setCreatorName] = useState('');
   const [shortDesc, setShortDesc] = useState('');
   const [longDesc, setLongDesc] = useState('');
   const [category, setCategory] = useState('');
@@ -34,6 +35,7 @@ export default function AgentForm() {
         const agent = res.data.find((a) => a.id === id);
         if (!agent) { navigate('/admin/agents'); return; }
         setName(agent.name);
+        setCreatorName(agent.creator_name || '');
         setShortDesc(agent.short_description);
         setLongDesc(agent.long_description);
         setCategory(agent.category);
@@ -85,6 +87,7 @@ export default function AgentForm() {
     formData.append('long_description', longDesc);
     formData.append('category', category);
     formData.append('status', status);
+    formData.append('creator_name', creatorName);
     formData.append('channels', JSON.stringify(channels));
     formData.append('channel_links', JSON.stringify(channelLinks));
     if (iconFile) formData.append('icon', iconFile);
@@ -158,6 +161,19 @@ export default function AgentForm() {
         <div>
           <label className="label">Name *</label>
           <input className="input" value={name} onChange={(e) => setName(e.target.value)} placeholder="e.g. SupportBot Pro" required />
+        </div>
+
+        {/* Creator name */}
+        <div>
+          <label className="label">Creator name</label>
+          <input
+            className="input"
+            value={creatorName}
+            onChange={(e) => setCreatorName(e.target.value)}
+            placeholder="Who made this agent"
+            maxLength={100}
+          />
+          <p className="text-xs text-gray-400 mt-1">Shown as "Made by ..." on the agent page</p>
         </div>
 
         {/* Short description */}

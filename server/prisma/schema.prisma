@@ -49,6 +49,7 @@ model Agent {
   short_description String        @db.VarChar(200)
   long_description  String        @db.Text
   icon_url          String?       @db.Text
+  creator_name      String?       @db.VarChar(100)
   category          AgentCategory
   channels          Json          @default("[]")
   channel_links     Json          @default("{}")
