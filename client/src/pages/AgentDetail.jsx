@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 import AgentIcon from '../components/AgentIcon';
 import ChannelBadge from '../components/ChannelBadge';
 import ReviewCard from '../components/ReviewCard';
@@ -170,8 +171,16 @@ export default function AgentDetail() {
         {/* About */}
         <div className="card p-8 mb-5">
           <h2 className="font-bold text-gray-900 mb-4">About</h2>
-          <div className="prose prose-sm max-w-none text-gray-600 leading-relaxed">
-            <ReactMarkdown>{agent.long_description}</ReactMarkdown>
+          <div className="prose prose-sm max-w-none text-[13px] leading-relaxed
+            prose-headings:text-gray-800 prose-headings:font-semibold prose-headings:tracking-tight
+            prose-h1:text-base prose-h2:text-sm prose-h3:text-xs
+            prose-p:text-gray-600 prose-p:text-[13px]
+            prose-li:text-gray-600 prose-li:text-[13px]
+            prose-strong:text-gray-700
+            prose-a:text-[#1B3C8C] prose-a:no-underline hover:prose-a:underline
+            prose-code:text-[12px] prose-code:bg-gray-50 prose-code:px-1 prose-code:rounded
+            prose-table:text-[12px] prose-th:text-gray-700 prose-td:text-gray-600">
+            <ReactMarkdown remarkPlugins={[remarkGfm]}>{agent.long_description}</ReactMarkdown>
           </div>
         </div>
 
