@@ -4,9 +4,15 @@ const { PrismaClient } = require('@prisma/client');
 const router = express.Router();
 const prisma = new PrismaClient();
 
+// Last-known-good cache for the agents list, keyed by query string.
+// Serves stale data when the DB is transiently unreachable so the catalog
+// doesn't go blank on brief Railway internal-network blips.
+const listCache = new Map();
+
 // GET /api/agents
 router.get('/', async (req, res) => {
   const { category, search, sort } = req.query;
+  const cacheKey = JSON.stringify({ category: category || '', search: search || '', sort: sort || '' });
 
   try {
     const where = {
@@ -58,9 +64,16 @@ router.get('/', async (req, res) => {
       };
     });
 
+    listCache.set(cacheKey, { data: result, cachedAt: Date.now() });
     res.json(result);
   } catch (err) {
-    console.error(err);
+    console.error('GET /api/agents failed:', err.code || err.message);
+    const cached = listCache.get(cacheKey);
+    if (cached) {
+      res.set('X-Cache', 'stale');
+      res.set('X-Cached-At', new Date(cached.cachedAt).toISOString());
+      return res.json(cached.data);
+    }
     res.status(500).json({ error: 'Server error' });
   }
 });
