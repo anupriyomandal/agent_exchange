@@ -32,12 +32,12 @@ export default function AgentTile({ agent, isLast }) {
         className="relative flex items-center gap-4 py-3.5 px-3 -mx-3 rounded-2xl transition-all duration-200"
         style={{
           background: hovered
-            ? 'linear-gradient(135deg, rgba(255,255,255,0.85) 0%, rgba(240,244,250,0.75) 100%)'
+            ? 'linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(232,238,248,0.85) 100%)'
             : 'transparent',
-          backdropFilter: hovered ? 'blur(12px)' : 'none',
-          WebkitBackdropFilter: hovered ? 'blur(12px)' : 'none',
+          backdropFilter: hovered ? 'blur(20px) saturate(180%)' : 'none',
+          WebkitBackdropFilter: hovered ? 'blur(20px) saturate(180%)' : 'none',
           boxShadow: hovered
-            ? '0 2px 20px 0 rgba(27,60,140,0.08), 0 0 0 1px rgba(255,255,255,0.7)'
+            ? '0 4px 28px 0 rgba(27,60,140,0.14), 0 0 0 1.5px rgba(27,60,140,0.12)'
             : 'none',
         }}
       >
