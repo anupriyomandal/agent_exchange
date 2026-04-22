@@ -77,8 +77,11 @@ export default function AgentTile({ agent, isLast }) {
         {/* Open button — only this navigates */}
         <button
           onClick={() => navigate(`/agent/${agent.slug}`)}
-          className="flex-shrink-0 px-4 py-1.5 rounded-full bg-[#F2F2F7] text-[#1B3C8C] text-[13px] font-semibold
-                     hover:bg-[#1B3C8C] hover:text-white transition-all duration-150"
+          className="flex-shrink-0 px-4 py-1.5 rounded-full text-[13px] font-semibold transition-all duration-200"
+          style={{
+            background: hovered ? '#1B3C8C' : '#F2F2F7',
+            color: hovered ? '#ffffff' : '#1B3C8C',
+          }}
         >
           Open
         </button>
